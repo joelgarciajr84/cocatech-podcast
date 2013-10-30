@@ -36,7 +36,7 @@ class CocatechPodcast extends WP_Widget
       echo $before_title . $title . $after_title;;
  
       #Conteudo do Widget
-      RSSImport(5,'http://feeds.cocatech.com.br/cocatech', 
+      RSSImport(5,'http://feeds.cocatech.com.br/cocatechpodcast', 
       '',false, '',  true, 200, ' ... ', 
       '', ' ... ', 
       ' <small>', '</small>', 
