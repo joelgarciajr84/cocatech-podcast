@@ -9,6 +9,5 @@
 */
 ?>
 <?php 
-	require_once dirname( __FILE__ ) . '/rss-import/rssimport.php';#Activate rss import plugin
 	require_once dirname( __FILE__ ) . '/widget.php';#Call Widget file
 ?>

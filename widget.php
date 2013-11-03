@@ -34,16 +34,39 @@ class CocatechPodcast extends WP_Widget
  
     if (!empty($title))
       echo $before_title . $title . $after_title;;
- 
-      #Conteudo do Widget
-      RSSImport(5,'http://feeds.cocatech.com.br/cocatechpodcast', 
-      '',false, '',  true, 200, ' ... ', 
-      '', ' ... ', 
-      ' <small>', '</small>', 
-      ' <small>','</small>', 
-      '<ul>','</ul>', 
-      '<li>','</li>' 
-    );
+?>
+
+<?php // Get RSS Feed(s)
+
+#Conteudo do Widget
+include_once( ABSPATH . WPINC . '/feed.php' );
+
+$rss = fetch_feed( 'http://feeds.cocatech.com.br/cocatechpodcast' );
+
+if ( ! is_wp_error( $rss ) ) : 
+
+    
+    $maxitems = $rss->get_item_quantity( 5 ); 
+
+    
+    $rss_items = $rss->get_items( 0, $maxitems );
+
+endif;
+?>
+<ul>
+  <?php foreach ( $rss_items as $item ) : ?>
+    <li>
+      <?php 
+      $data = $item->get_date;
+      ?>
+      <a  href="<?php echo esc_url( $item->get_permalink() ); ?>"
+      title='<?php echo "Clique para ouvir o episodio em uma aba nova" ?>' target="_blank"/>
+      <?php echo esc_html( $item->get_title() ); ?>
+      </a>
+    </li>
+  <?php endforeach; ?>
+</ul>
+<?php
     echo $after_widget;
   }
 }
